@@ -10,6 +10,10 @@ class PostingDao extends BaseDao{
     parent::__construct("postings");
   }
 
+  public function get_postings_by_photographer_id($photographer_id){
+    return $this->query("SELECT * FROM postings WHERE photographer_id = :photographer_id", ['photographer_id' => $photographer_id]);
+  }
+
 }
 
 ?>

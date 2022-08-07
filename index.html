@@ -5,12 +5,14 @@
   <meta charset="utf-8">
   <title>Photography App</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/selectize.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
   <style>
     .error{
       color:red;
     }
   </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -48,6 +50,8 @@
       <div class="row">
         <div>
           <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#addPostingModal">New Posting</button>
+          <button class="btn btn-success btn-lg" onclick="PostingService.listMyPostings()">My Postings</button>
+          <button class="btn btn-success btn-lg" onclick="PostingService.list()">All Posting</button>
         </div>
       </div>
 
@@ -67,6 +71,8 @@
 <script src="js/posting-service.js"></script>
 <script src="js/todo-service.js"></script>
 <script src="js/user-service.js"></script>
+<script src = "js/selectize.js"></script>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -107,6 +113,9 @@
               <label>Description</label>
               <input name="description" type="text" class="form-control required" placeholder="Enter description">
             </div>
+            <label for="tierList">Tier</label>
+            <select id="tierList">
+            </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

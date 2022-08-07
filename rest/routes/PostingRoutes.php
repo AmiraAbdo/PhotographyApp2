@@ -21,6 +21,11 @@ Flight::route('GET /postings/@id', function($id){
   Flight::json(Flight::postingService()->get_by_id($id));
 });
 
+
+Flight::route('GET /postings/@id/photographer', function($id){
+  Flight::json(Flight::postingService()->get_postings_by_photographer_id($id));
+});
+
 /**
  * @OA\Get(path="/notes/{id}/todos", tags={"todo"}, security={{"ApiKeyAuth": {}}},
  *     @OA\Parameter(in="path", name="id", example=1, description="List todos"),

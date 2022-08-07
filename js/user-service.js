@@ -11,7 +11,38 @@ var UserService = {
         UserService.login(entity);
       }
     });
+    $('#register-form').validate({
+      submitHandler: function(form) {
+        var entity = Object.fromEntries((new FormData(form)).entries());
+        UserService.register(entity);
+      }
+    });
   },
+
+  register: function(entity){
+
+    entity.category_id = $('select[class*="selectize"] option').val();
+  //  console.log(entity);
+
+    $.ajax({
+         url: 'rest/register',
+         type: 'POST',
+         data: JSON.stringify(entity),
+         contentType: "application/json",
+         dataType: "json",
+         success: function (response) {
+           localStorage.setItem("token", response.token);
+           toastr.success("Successfully registered!", "Information:");
+           window.location.replace("index.html");
+
+         },
+         error: function (response) {
+
+           toastr.error("Please try again.", "Error!");
+         }
+       });
+  },
+
   login: function(entity){
     $.ajax({
       url: 'rest/login',
@@ -22,7 +53,7 @@ var UserService = {
       success: function(result) {
         //console.log(result);
         localStorage.setItem("token", result.token);
-        
+
       //  console.log('got here');
 
       //  console.log('bye');

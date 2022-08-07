@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>ToDo App</title>
+  <title>Photography App</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/selectize.css" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
@@ -19,18 +19,30 @@
     <div class="container marketing" style="margin-top:100px;">
       <!-- Three columns of text below the carousel -->
       <div class="row">
-        <form id="login-form">
+        <form id="register-form">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input name="name" class="form-control" id="name" value="test">
+          </div>
           <div class="mb-3">
             <label class="form-label">Email address</label>
-            <input type="email" name="email" class="form-control" id="email">
+            <input type="email" name="email" class="form-control" id="email" value="test@test.com">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Contact</label>
+            <input name="contact" class="form-control" id="contact" value="123456789">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">About</label>
+            <input name="about" class="form-control" id="about" value="Lorem ipsum * 100">
           </div>
           <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" id="password">
+            <input type="password" name="password" class="form-control" id="password" value="123">
           </div>
           <div class="mb-3">
             <label class="form-label">Repeat Password</label>
-            <input type="password" name="repeatpassword" class="form-control" id= "repeatpassword" data-rule-equalTo="#password">
+            <input type="password" name="repeatpassword" class="form-control" id= "repeatpassword" data-rule-equalTo="#password" value="123">
           </div>
           <label for="categoryList">Category</label>
           <select id="categoryList">

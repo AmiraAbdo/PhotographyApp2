@@ -20,12 +20,12 @@ Flight::register('photographerService', 'PhotographerService');
 Flight::register('tierService', 'TierService');
 Flight::register('gearService', 'GearService');
 Flight::register('categoryService', 'CategoryService');
-
+/*
 Flight::map('error', function(Exception $ex){
     // Handle error
     Flight::json(['message' => $ex->getMessage()], 500);
 });
-
+*/
 // middleware method for login
 Flight::route('/*', function(){
   return TRUE;

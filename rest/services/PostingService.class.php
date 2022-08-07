@@ -8,5 +8,8 @@ class PostingService extends BaseService{
     parent::__construct(new PostingDao());
   }
 
+  public function get_postings_by_photographer_id($photographer_id){
+    return $this->dao->get_postings_by_photographer_id($photographer_id);
+  }
 }
 ?>
