@@ -1,5 +1,6 @@
 var UserService = {
   init: function(){
+    UserService.fillCategories('#categoryList');
     var token = localStorage.getItem("token");
     if (token){
       window.location.replace("index.html");
@@ -19,9 +20,12 @@ var UserService = {
       contentType: "application/json",
       dataType: "json",
       success: function(result) {
-        console.log(result);
+        //console.log(result);
         localStorage.setItem("token", result.token);
-        localStorage.setItem("user_id", parseJWT(result.token));
+        
+      //  console.log('got here');
+
+      //  console.log('bye');
         window.location.replace("index.html");
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -44,4 +48,38 @@ var UserService = {
     localStorage.clear();
     window.location.replace("login.html");
   },
+
+
+  fillCategories: function (list, mun_id = null) {
+   $.ajax({
+     url: "rest/categories",
+     type: "GET",
+
+     success: function (data) {
+       console.log(data);
+
+       $(list).append("<option value=\"\"></option>");
+       for (let i = 0; i < data.length; i++) {
+         $(list).append("<option value='" + data[i].id + "'>" + data[i].name + '-' + data[i].description + "</option>");
+       };
+
+       var $select = $(list).selectize({
+         create: false,
+         sortField: "text",
+         placeholder: "Enter your category"
+       });
+
+       var selectize = $select[0].selectize;
+       if(mun_id != null){
+         selectize.setValue(mun_id);
+       }else{
+         selectize.setValue('1000');
+       }
+     },
+
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+      toastr.error("Please try again.", "Error!");
+    }
+  });
+},
 }

@@ -1,4 +1,5 @@
 var PostingService = {
+
     init: function(){
       $('#addPostingForm').validate({
         submitHandler: function(form) {
@@ -25,6 +26,7 @@ var PostingService = {
            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
          },
          success: function(data) {
+
            $("#posting-list").html("");
            var html = "";
            for(let i = 0; i < data.length; i++){
@@ -101,7 +103,11 @@ var PostingService = {
     }, */
 
     add: function(note){
-      
+      var user_id = (UserService.parseJWT(localStorage.getItem("token"))).id;
+      //console.log(user_id);
+      note.photographer_id = user_id;
+      console.log(note);
+      /*
       $.ajax({
         url: 'rest/postings',
         type: 'POST',
@@ -117,7 +123,7 @@ var PostingService = {
             $("#addPostingModal").modal("hide");
             toastr.success("Note added!");
         }
-      });
+      });*/
     },
 
     parseJWT: function (token) {

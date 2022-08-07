@@ -21,10 +21,10 @@ Flight::register('tierService', 'TierService');
 Flight::register('gearService', 'GearService');
 Flight::register('categoryService', 'CategoryService');
 
-/*Flight::map('error', function(Exception $ex){
+Flight::map('error', function(Exception $ex){
     // Handle error
     Flight::json(['message' => $ex->getMessage()], 500);
-});*/
+});
 
 // middleware method for login
 Flight::route('/*', function(){
@@ -58,6 +58,8 @@ Flight::route('GET /docs.json', function(){
 
 require_once __DIR__.'/routes/PostingRoutes.php';
 require_once __DIR__.'/routes/PhotographerRoutes.php';
+require_once __DIR__.'/routes/TierRoutes.php';
+require_once __DIR__.'/routes/CategoryRoutes.php';
 require_once __DIR__.'/dao/PhotographerDao.class.php';
 
 
