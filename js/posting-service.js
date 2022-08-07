@@ -107,7 +107,7 @@ var PostingService = {
       //console.log(user_id);
       note.photographer_id = user_id;
       console.log(note);
-      /*
+
       $.ajax({
         url: 'rest/postings',
         type: 'POST',
@@ -123,7 +123,7 @@ var PostingService = {
             $("#addPostingModal").modal("hide");
             toastr.success("Note added!");
         }
-      });*/
+      });
     },
 
     parseJWT: function (token) {
