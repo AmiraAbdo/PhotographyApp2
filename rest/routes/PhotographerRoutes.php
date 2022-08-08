@@ -84,7 +84,7 @@ Flight::route('POST /login', function(){
     $login = Flight::request()->data->getData();
     $user = Flight::photographerDao()->get_photographer_by_email($login['email']);
     if (isset($user['id'])){
-      if($user['password'] == $login['password']){
+      if($user['password'] == md5($login['password'])){
         unset($user['password']);
         $jwt = JWT::encode($user, Config::JWT_SECRET(), 'HS256');
         Flight::json(['token' => $jwt]);
@@ -125,7 +125,7 @@ Flight::route('POST /register', function () {
 
   $data = Flight::request()->data->getData();
   unset($data['repeatpassword']);
-  $data['password'] = ($data['password']);
+  $data['password'] = md5($data['password']);
 
   $catch = Flight::photographerService()->add($data);
   unset($catch['password']);

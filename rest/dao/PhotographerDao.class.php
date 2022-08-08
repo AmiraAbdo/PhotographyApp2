@@ -15,7 +15,7 @@ class PhotographerDao extends BaseDao{
   }
 
   public function get_photographer_by_posting_id($posting_id){
-    return $this->query("SELECT ph.name, ph.email, ph.contact, ph.about from postings p join photographers ph on p.photographer_id=ph.id where p.id = :posting_id", ['posting_id' => $posting_id]);
+    return $this->query("SELECT ph.id, ph.name, ph.email, ph.contact, ph.about from postings p join photographers ph on p.photographer_id=ph.id where p.id = :posting_id", ['posting_id' => $posting_id]);
   }
 
 }

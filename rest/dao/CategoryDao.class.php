@@ -10,6 +10,10 @@ class CategoryDao extends BaseDao{
     parent::__construct("categories");
   }
 
+  public function get_category_by_photographer_id($photographer_id){
+    return $this->query("SELECT c.* from photographers p join categories c on p.category_id=c.id where p.id = :photographer_id", ['photographer_id' => $photographer_id]);
+  }
+
 }
 
 ?>

@@ -19,11 +19,12 @@ var UserService = {
     });
   },
 
+  goToRegister: function(){
+    window.location.replace("register.html");
+  },
+
   register: function(entity){
-
     entity.category_id = $('select[class*="selectize"] option').val();
-  //  console.log(entity);
-
     $.ajax({
          url: 'rest/register',
          type: 'POST',
@@ -34,10 +35,8 @@ var UserService = {
            localStorage.setItem("token", response.token);
            toastr.success("Successfully registered!", "Information:");
            window.location.replace("index.html");
-
          },
          error: function (response) {
-
            toastr.error("Please try again.", "Error!");
          }
        });
@@ -51,12 +50,7 @@ var UserService = {
       contentType: "application/json",
       dataType: "json",
       success: function(result) {
-        //console.log(result);
         localStorage.setItem("token", result.token);
-
-      //  console.log('got here');
-
-      //  console.log('bye');
         window.location.replace("index.html");
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -79,7 +73,6 @@ var UserService = {
     localStorage.clear();
     window.location.replace("login.html");
   },
-
 
   fillCategories: function (list, mun_id = null) {
    $.ajax({

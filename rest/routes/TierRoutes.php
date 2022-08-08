@@ -21,4 +21,8 @@ Flight::route('GET /tiers/@id', function($id){
   Flight::json(Flight::tierService()->get_by_id($id));
 });
 
+Flight::route('GET /postings/@id/tiers', function($id){
+  Flight::json(Flight::tierService()->get_tier_by_posting_id($id));
+});
+
 ?>

@@ -8,5 +8,9 @@ class CategoryService extends BaseService{
     parent::__construct(new CategoryDao());
   }
 
+  public function get_category_by_photographer_id($photographer_id){
+    return $this->dao->get_category_by_photographer_id($photographer_id);
+  }
+
 }
 ?>

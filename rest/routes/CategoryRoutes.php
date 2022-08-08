@@ -21,5 +21,8 @@ Flight::route('GET /categories/@id', function($id){
   Flight::json(Flight::categoryService()->get_by_id($id));
 });
 
+Flight::route('GET /categories/photographer/@id', function($id){
+  Flight::json(Flight::categoryService()->get_category_by_photographer_id($id));
+});
 
 ?>

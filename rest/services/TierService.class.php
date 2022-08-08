@@ -8,5 +8,9 @@ class TierService extends BaseService{
     parent::__construct(new TierDao());
   }
 
+  public function get_tier_by_posting_id($posting_id){
+    return $this->dao->get_tier_by_posting_id($posting_id);
+  }
+
 }
 ?>
