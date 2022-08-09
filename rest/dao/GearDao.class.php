@@ -10,6 +10,10 @@ class GearDao extends BaseDao{
     parent::__construct("gear");
   }
 
+  public function get_gear_by_photographer_id($photographer_id){
+    return $this->query("SELECT * FROM gear where photographer_id = :photographer_id", ['photographer_id' => $photographer_id]);
+  }
+
 }
 
 ?>

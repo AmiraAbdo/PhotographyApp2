@@ -31,7 +31,7 @@ Flight::route('/*', function(){
   return TRUE;
   //perform JWT decode
   $path = Flight::request()->url;
-  if ($path == '/login' || $path == '/docs.json') return TRUE; // exclude login route from middleware
+  if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/categories') return TRUE; // exclude login route from middleware
 
   $headers = getallheaders();
   if (@!$headers['Authorization']){
@@ -59,6 +59,7 @@ Flight::route('GET /docs.json', function(){
 require_once __DIR__.'/routes/PostingRoutes.php';
 require_once __DIR__.'/routes/PhotographerRoutes.php';
 require_once __DIR__.'/routes/TierRoutes.php';
+require_once __DIR__.'/routes/GearRoutes.php';
 require_once __DIR__.'/routes/CategoryRoutes.php';
 require_once __DIR__.'/dao/PhotographerDao.class.php';
 

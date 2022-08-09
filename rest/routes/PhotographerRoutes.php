@@ -2,9 +2,9 @@
 // CRUD operations for todos entity
 
 /**
- * @OA\Get(path="/notes", tags={"todo"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return all user notes from the API. ",
- *         @OA\Response( response=200, description="List of notes.")
+ * @OA\Get(path="/photographers", tags={"Photographers"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return all photographers from the API. ",
+ *         @OA\Response( response=200, description="List of photographers.")
  * )
  */
 Flight::route('GET /photographers', function(){
@@ -12,9 +12,9 @@ Flight::route('GET /photographers', function(){
 });
 
 /**
- * @OA\Get(path="/notes/{id}", tags={"todo"}, security={{"ApiKeyAuth": {}}},
- *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
- *     @OA\Response(response="200", description="Fetch individual note")
+ * @OA\Get(path="/photographers/{id}", tags={"Photographers"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of photographer"),
+ *     @OA\Response(response="200", description="Fetch individual photographer")
  * )
  */
 Flight::route('GET /photographers/@id', function($id){
@@ -22,9 +22,9 @@ Flight::route('GET /photographers/@id', function($id){
 });
 
 /**
- * @OA\Get(path="/notes/{id}/todos", tags={"todo"}, security={{"ApiKeyAuth": {}}},
- *     @OA\Parameter(in="path", name="id", example=1, description="List todos"),
- *     @OA\Response(response="200", description="Fetch note's todos")
+ * @OA\Get(path="/{id}/photographers", tags={"Photographers"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of posting whose photographer we want to get"),
+ *     @OA\Response(response="200", description="Fetch posting's photographer")
  * )
  */
 Flight::route('GET /@id/photographers', function($id){
@@ -32,28 +32,6 @@ Flight::route('GET /@id/photographers', function($id){
 });
 
 
-/**
-* add notes
-*/
-Flight::route('POST /notes', function(){
-  Flight::json(Flight::noteService()->add(Flight::request()->data->getData()));
-});
-
-/**
-* update notes
-*/
-Flight::route('PUT /notes/@id', function($id){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::noteService()->update($id, $data));
-});
-
-/**
-* delete notes
-*/
-Flight::route('DELETE /notes/@id', function($id){
-  Flight::noteService()->delete($id);
-  Flight::json(["message" => "deleted"]);
-});
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -62,12 +40,12 @@ use Firebase\JWT\Key;
 * @OA\Post(
 *     path="/login",
 *     description="Login to the system",
-*     tags={"todo"},
+*     tags={"Photographers"},
 *     @OA\RequestBody(description="Basic user info", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
-*    				@OA\Property(property="email", type="string", example="dino.keco@gmail.com",	description="Email"),
-*    				@OA\Property(property="password", type="string", example="1234",	description="Password" )
+*    				@OA\Property(property="email", type="string", example="test@test.com",	description="Email"),
+*    				@OA\Property(property="password", type="string", example="123",	description="Password" )
 *        )
 *     )),
 *     @OA\Response(
@@ -98,17 +76,18 @@ Flight::route('POST /login', function(){
 
 /**
 * @OA\Post(
-*     path="/public/register",
+*     path="/register",
 *     description="Register a user into the app",
-*     tags={"users"},
+*     tags={"Photographers"},
 *     @OA\RequestBody(description="Basic user register info", required=true,
 *       @OA\MediaType(mediaType="application/json",
 *    			@OA\Schema(
-*           @OA\Property(property="user_mail", type="string", example="testing@test.t",	description="User email"),
-*           @OA\Property(property="password", type="string", example="weakpassword",	description="User password"),
-*           @OA\Property(property="phone_number", type="string", example="123123123",	description="User phonenumber"),
-*           @OA\Property(property="city", type="string", example="City",	description="User city"),
-*           @OA\Property(property="municipality", type="string", example="Municipality",	description="User municipality"),
+*           @OA\Property(property="name", type="string", example="AmiraAbdo",	description="Username"),
+*           @OA\Property(property="email", type="string", example="amira.abdo@stu.ibu.edu.ba",	description="User's email"),
+*           @OA\Property(property="contact", type="string", example="123123123",	description="User's phone number"),
+*           @OA\Property(property="about", type="string", example="Something a user wants to share about themselves :)",	description="Some info about the user"),
+*           @OA\Property(property="password", type="string", example="password123",	description="User's password"),
+*           @OA\Property(property="category", type="string", example="Wildlife",	description="User's category"),
 *        )
 *     )),
 *     @OA\Response(

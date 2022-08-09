@@ -1,10 +1,10 @@
 <?php
-// CRUD operations for todos entity
+// CRUD operations for category entity
 
 /**
- * @OA\Get(path="/notes", tags={"todo"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return all user notes from the API. ",
- *         @OA\Response( response=200, description="List of notes.")
+ * @OA\Get(path="/categories", tags={"Categories"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return all categories from the API. ",
+ *         @OA\Response( response=200, description="List of categories.")
  * )
  */
 Flight::route('GET /categories', function(){
@@ -12,17 +12,14 @@ Flight::route('GET /categories', function(){
 });
 
 /**
- * @OA\Get(path="/notes/{id}", tags={"todo"}, security={{"ApiKeyAuth": {}}},
- *     @OA\Parameter(in="path", name="id", example=1, description="Id of note"),
- *     @OA\Response(response="200", description="Fetch individual note")
+ * @OA\Get(path="/categories/photographer/{id}", tags={"Categories"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of photographer whose category we need"),
+ *     @OA\Response(response="200", description="Fetch a particular photographer's category")
  * )
  */
-Flight::route('GET /categories/@id', function($id){
-  Flight::json(Flight::categoryService()->get_by_id($id));
-});
-
 Flight::route('GET /categories/photographer/@id', function($id){
   Flight::json(Flight::categoryService()->get_category_by_photographer_id($id));
 });
+
 
 ?>

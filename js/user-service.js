@@ -14,7 +14,8 @@ var UserService = {
     $('#register-form').validate({
       submitHandler: function(form) {
         var entity = Object.fromEntries((new FormData(form)).entries());
-        UserService.register(entity);
+        var entity2 = Object.fromEntries((new FormData(form)).entries());
+        UserService.register(entity, entity2);
       }
     });
   },
@@ -23,8 +24,10 @@ var UserService = {
     window.location.replace("register.html");
   },
 
-  register: function(entity){
+  register: function(entity, entity2){
     entity.category_id = $('select[class*="selectize"] option').val();
+    delete entity.device_name;
+    delete entity.device_description;
     $.ajax({
          url: 'rest/register',
          type: 'POST',
@@ -34,12 +37,40 @@ var UserService = {
          success: function (response) {
            localStorage.setItem("token", response.token);
            toastr.success("Successfully registered!", "Information:");
-           window.location.replace("index.html");
+           UserService.addGear(entity2);
+          // window.location.replace("index.html");
          },
          error: function (response) {
            toastr.error("Please try again.", "Error!");
          }
        });
+  },
+
+  addGear: function(entity){
+    var id = (UserService.parseJWT(localStorage.getItem("token"))).id;
+    entity.photographer_id= id;
+    entity.device_name=document.getElementById('device_name').value;
+    entity.device_description=document.getElementById('device_description').value;
+    delete entity.name;
+    delete entity.email;
+    delete entity.password;
+    delete entity.contact;
+    delete entity.about;
+    delete entity.category_id;
+    delete entity.repeatpassword;
+
+    $.ajax({
+      url: 'rest/gear',
+      type: 'POST',
+      data: JSON.stringify(entity),
+      contentType: "application/json",
+      dataType: "json",
+      success: function(result) {
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        toastr.error(XMLHttpRequest.responseJSON.message);
+      }
+    });
   },
 
   login: function(entity){
@@ -80,8 +111,6 @@ var UserService = {
      type: "GET",
 
      success: function (data) {
-       console.log(data);
-
        $(list).append("<option value=\"\"></option>");
        for (let i = 0; i < data.length; i++) {
          $(list).append("<option value='" + data[i].id + "'>" + data[i].name + '-' + data[i].description + "</option>");
