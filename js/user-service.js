@@ -105,7 +105,7 @@ var UserService = {
     window.location.replace("login.html");
   },
 
-  fillCategories: function (list, mun_id = null) {
+  fillCategories: function (list, cat_id = null) {
    $.ajax({
      url: "rest/categories",
      type: "GET",
@@ -123,8 +123,8 @@ var UserService = {
        });
 
        var selectize = $select[0].selectize;
-       if(mun_id != null){
-         selectize.setValue(mun_id);
+       if(cat_id != null){
+         selectize.setValue(cat_id);
        }else{
          selectize.setValue('1000');
        }

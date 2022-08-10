@@ -33,11 +33,11 @@ var PostingService = {
           }
         }
       });
-      $('#editTierForm').validate({
+      $('#editPostingForm').validate({
         submitHandler: function(form){
           var entity = Object.fromEntries((new FormData(form)).entries());
           //console.log(entity);
-          var id = $("#editTierModal").data("id");
+          var id = $("#editPostingModal").data("id");
           //console.log(id);
 
           $.ajax({
@@ -54,9 +54,9 @@ var PostingService = {
             success: function () {
               // ajax put request forsira reload stranice na ?
               // TODO nema potrebe za reload
-              console.log('hi');
+              //console.log('hi');
               toastr.success("Data updated successfully", "Information:");
-              $("#editTierModal").modal("hide");
+              $("#editPostingModal").modal("hide");
               //UserService.myProfile(); // perf optimization
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -252,15 +252,15 @@ var PostingService = {
          success: function(data) {
            var html= "";
            html+=`
-           <p> This photographer's device: `+ data[0].device_name +`</p>
-           <p> About the device: `+ data[0].device_description +`</p>
+           <p> This photographer's device:<b> `+ data[0].device_name +`</b></p>
+           <p> About the device: <b>`+ data[0].device_description +`</b></p>
            `;
 
            $("#modal_body2").html(html);
          },
          error: function(XMLHttpRequest, textStatus, errorThrown) {
            toastr.error(XMLHttpRequest.responseJSON.message);
-           $('.note-button').attr('disabled', false);
+           //$('.note-button').attr('disabled', false);
          }});
     },
 
@@ -287,7 +287,7 @@ var PostingService = {
            $('.note-button').attr('disabled', false);
          }});
     },
-
+/*
     get: function(id){
       $('.note-button').attr('disabled', true);
 
@@ -310,7 +310,7 @@ var PostingService = {
            toastr.error(XMLHttpRequest.responseJSON.message);
            $('.note-button').attr('disabled', false);
          }});
-    },
+    },*/
 
     add: function(entity){
       var user_id = (UserService.parseJWT(localStorage.getItem("token"))).id;
@@ -328,7 +328,7 @@ var PostingService = {
         contentType: "application/json",
         dataType: "json",
         success: function(result) {
-            $("#note-list").html('<div class="spinner-border" role="status"> <span class="sr-only"></span>  </div>');
+        //    $("#note-list").html('<div class="spinner-border" role="status"> <span class="sr-only"></span>  </div>');
             PostingService.list(); // perf optimization
             $("#addPostingModal").modal("hide");
             toastr.success("Posting added!");
@@ -359,7 +359,7 @@ var PostingService = {
         },
         type: 'DELETE',
         success: function(result) {
-            $("#note-list").html('<div class="spinner-border" role="status"> <span class="sr-only"></span>  </div>');
+        //    $("#note-list").html('<div class="spinner-border" role="status"> <span class="sr-only"></span>  </div>');
             PostingService.list();
             toastr.success("Posting deleted!");
         }
@@ -367,8 +367,8 @@ var PostingService = {
     },
 
     update: function(id){
-      $('#editTierModal').modal("show");
-      $('#editTierModal').data("id", id);
+      $('#editPostingModal').modal("show");
+      $('#editPostingModal').data("id", id);
 
       //  $("#pets-list").data("pets", data);
       //var pets = $("#pets-list").data("pets");
