@@ -28,10 +28,10 @@ Flight::map('error', function(Exception $ex){
 */
 // middleware method for login
 Flight::route('/*', function(){
-  return TRUE;
+  //return TRUE;
   //perform JWT decode
   $path = Flight::request()->url;
-  if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/categories') return TRUE; // exclude login route from middleware
+  if ($path == '/login' || $path == '/docs.json' || $path == '/register' || $path == '/categories') return TRUE; // exclude routes from middleware
 
   $headers = getallheaders();
   if (@!$headers['Authorization']){

@@ -56,7 +56,17 @@ Flight::route('GET /postings/@id/photographer', function($id){
 * )
 */
 Flight::route('POST /postings', function(){
-  Flight::json(Flight::postingService()->add(Flight::request()->data->getData()));
+  $data = Flight::request()->data->getData();
+//  print_r($data['photographer_id']);
+//  $server_data = Flight::get('user');
+//  print_r($server_data);
+
+  if($data['photographer_id'] != Flight::get('user')['id']){ //security layer, so users can't change another users favs
+  Flight::json(["message" => "Trying to access blocked data"], 403);
+  die;
+}
+
+  Flight::json(Flight::postingService()->add($data));
 });
 
 /**
