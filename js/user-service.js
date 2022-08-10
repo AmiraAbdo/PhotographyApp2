@@ -38,7 +38,7 @@ var UserService = {
            localStorage.setItem("token", response.token);
            toastr.success("Successfully registered!", "Information:");
            UserService.addGear(entity2);
-          // window.location.replace("index.html");
+           window.location.replace("index.html");
          },
          error: function (response) {
            toastr.error("Please try again.", "Error!");
