@@ -80,4 +80,30 @@ Flight::route('DELETE /postings/@id', function($id){
   Flight::json(["message" => "deleted"]);
 });
 
+// TODO swagger dokumentacija
+
+Flight::route('PUT /postings/@id', function ($id) {
+
+  $data = Flight::request()->data->getData();
+
+  Flight::postingService()->update($id,$data);
+  Flight::json(["message" => "updated"]);
+
+  /*
+  $user = Flight::get('user');
+
+  if($user['id'] == $id){
+
+    $data = Flight::request()->data->getData();
+    unset($data['password']);
+    Flight::usersService()->update($id,$data,"user_id");
+    Flight::json(["message" => "updated"]);
+
+  }else{
+    throw new Exception("This is hack you will be traced, be prepared :)");
+  }*/
+
+
+});
+
 ?>

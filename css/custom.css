@@ -2,3 +2,27 @@
   width:100%;
   max-width:600px;
 }
+
+#logoutButton{
+  background-color: #F6F1D1 !important;
+}
+
+.darkPurple{
+  background-color: #412234 !important;
+  border: none !important;
+}
+
+.lightPurple{
+  background-color: #938BA1 !important;
+  border: none !important;
+}
+
+.darkBlue{
+  background-color: #0B3948 !important;
+  border: none !important;
+}
+
+.lightGreen{
+  background-color: #81958D !important;
+  border: none !important;
+}
